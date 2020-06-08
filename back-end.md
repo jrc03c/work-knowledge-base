@@ -4,7 +4,7 @@
 
 **1.** Install NGINX:
 
-```bash
+```
 sudo apt-get install nginx
 ```
 
@@ -12,7 +12,7 @@ sudo apt-get install nginx
 
 **3.** Request Certbot certificates manually (if the DNS records aren't set yet). This method requires the creation of TXT DNS records. (Don't forget to add the `--dry-run` flag for testing first!)
 
-```bash
+```
 sudo certbot certonly --manual --preferred-challenges=dns -d example.com
 ```
 
@@ -50,19 +50,19 @@ Note that this does two things. First, it redirects all HTTP traffic to HTTPS. S
 
 **5.** Symlink this new configuration file to `/etc/nginx/sites-enabled` with:
 
-```bash
+```
 sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/example.com
 ```
 
 **6.** Test the NGINX configuration with:
 
-```bash
+```
 sudo nginx -t
 ```
 
 **7.** If it passes, restart the NGINX service with:
 
-```bash
+```
 sudo service nginx restart
 ```
 
@@ -81,7 +81,7 @@ app.listen(8000)
 
 **10.** Start the Express app.
 
-```bash
+```
 forever start /path/to/app.js
 ```
 
