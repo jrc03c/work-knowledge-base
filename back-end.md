@@ -1,6 +1,4 @@
-================
-NGINX w/ Express
-================
+# NGINX w/ Express
 
 > **NOTE:** The following steps assume that you'll be running `nginx` as a reverse proxy for an Express app.
 
