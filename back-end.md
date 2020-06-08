@@ -1,6 +1,6 @@
 # NGINX w/ Express
 
-> **NOTE:** The following steps assume that you'll be running `nginx` as a reverse proxy for an Express app.
+> **NOTE:** The following steps assume that you'll be running NGINX as a reverse proxy for an Express app.
 
 **1.** Install NGINX:
 
