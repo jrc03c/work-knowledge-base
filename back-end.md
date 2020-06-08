@@ -2,7 +2,7 @@
 
 > **NOTE:** The following steps assume that you'll be running `nginx` as a reverse proxy for an Express app.
 
-**1.** Install `nginx`:
+**1.** Install NGINX:
 
 ```
 sudo apt-get install nginx
@@ -54,13 +54,13 @@ Note that this does two things. First, it redirects all HTTP traffic to HTTPS. S
 sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/example.com
 ```
 
-**6.** Test the `nginx` configuration with:
+**6.** Test the NGINX configuration with:
 
 ```
 sudo nginx -t
 ```
 
-**7.** If it passes, restart the `nginx` service with:
+**7.** If it passes, restart the NGINX service with:
 
 ```
 sudo service nginx restart
