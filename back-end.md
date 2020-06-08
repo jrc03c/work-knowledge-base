@@ -2,21 +2,21 @@
 
 > **NOTE:** The following steps assume that you'll be running `nginx` as a reverse proxy for an Express app.
 
-1. Install `nginx`:
+**1.** Install `nginx`:
 
 ```
 sudo apt-get install nginx
 ```
 
-2. Install [Certbot](https://certbot.eff.org/).
+**2.** Install [Certbot](https://certbot.eff.org/).
 
-3. Request Certbot certificates manually (if the DNS records aren't set yet). This method requires the creation of TXT DNS records. (Don't forget to add the `--dry-run` flag for testing first!)
+**3.** Request Certbot certificates manually (if the DNS records aren't set yet). This method requires the creation of TXT DNS records. (Don't forget to add the `--dry-run` flag for testing first!)
 
 ```
 sudo certbot certonly --manual --preferred-challenges=dns -d example.com
 ```
 
-4. Create `/etc/nginx/sites-available/example.com` and fill with:
+**4.** Create `/etc/nginx/sites-available/example.com` and fill with:
 
 ```
 server {
@@ -48,22 +48,22 @@ server {
 
 Note that this does two things. First, it redirects all HTTP traffic to HTTPS. Second, it sends all HTTPS traffic to the Express app running on port 8000.
 
-5. Symlink this new configuration file to `/etc/nginx/sites-enabled` with:
+**5.** Symlink this new configuration file to `/etc/nginx/sites-enabled` with:
 
 ```
 sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/example.com
 ```
 
-6. Test the `nginx` configuration with:
+**6.** Test the `nginx` configuration with:
 
 ```
 sudo nginx -t
 ```
 
-7. If it passes, restart the `nginx` service with:
+**7.** If it passes, restart the `nginx` service with:
 
 ```
 sudo service nginx restart
 ```
 
-8. Confirm that you can access https://example.com in the browser.
+**8.** Confirm that you can access https://example.com in the browser.
