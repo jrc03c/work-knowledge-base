@@ -8,7 +8,7 @@
 sudo apt-get install nginx
 ```
 
-2. Install `[certbot](https://certbot.eff.org/)`.
+2. Install [Certbot](https://certbot.eff.org/).
 
 3. Request `certbot` certificates manually (if the DNS records aren't set yet). This method requires the creation of TXT DNS records. (Don't forget to add the `--dry-run` flag for testing first!)
 
