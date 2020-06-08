@@ -66,7 +66,7 @@ sudo nginx -t
 sudo service nginx restart
 ```
 
-**9.** Build a simple Express app (or use a preexisting one) that'll run on port 8000:
+**8.** Build a simple Express app (or use a preexisting one) that'll run on port 8000:
 
 ```js
 let express = require("express")
@@ -79,10 +79,10 @@ app.get("/", function(request, response){
 app.listen(8000)
 ```
 
-**10.** Start the Express app.
+**9.** Start the Express app.
 
 ```
 forever start /path/to/app.js
 ```
 
-**11.** Confirm that you can access https://example.com in the browser.
+**10.** Confirm that you can access https://example.com in the browser.
