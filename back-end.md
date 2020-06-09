@@ -71,7 +71,7 @@ app.get("/", function(request, response){
 app.listen(8000)
 ```
 
-**9.** Start the Express app.
+**9.** Start the Express app. (NOTE: Requires Node, `forever`, and Express!)
 
 ```
 forever start /path/to/app.js
