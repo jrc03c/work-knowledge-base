@@ -1,6 +1,6 @@
 # NGINX w/ Express
 
-> **NOTE:** The following steps assume that you'll be running NGINX as a reverse proxy for an Express app.
+> **NOTE:** The following steps assume that you'll be running NGINX as a reverse proxy for an Express app (on Ubuntu 18.04 LTS).
 
 **1.** Install NGINX:
 
@@ -8,65 +8,54 @@
 sudo apt-get install nginx
 ```
 
-**2.** Install [Certbot](https://certbot.eff.org/).
-
-**3.** Request Certbot certificates manually (if the DNS records aren't set yet). This method requires the creation of TXT DNS records. (Don't forget to add the `--dry-run` flag for testing first!)
+**2.** Install [Certbot](https://certbot.eff.org/):
 
 ```
-sudo certbot certonly --manual --preferred-challenges=dns -d example.com
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install certbot python3-certbot-nginx
 ```
 
-**4.** Create `/etc/nginx/sites-available/example.com` and fill with:
+**3.** Create and configure a server block in `/etc/nginx/sites-available/example.com`:
 
 ```
 server {
-  listen 80;
   server_name example.com;
-  return 301 https://example.com$request_uri;
-}
-
-server {
-  listen 443 ssl;
-  server_name example.com;
-
-  ssl on;
-
-  ssl_certificate /etc/letsencrypt/live/example.com/cert.pem;
-  ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
-
-  ssl_stapling on;
-  ssl_stapling_verify on;
-  ssl_trusted_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
-
-  ssl_session_timeout 5m;
-
-  location / {
-    proxy_pass http://127.0.0.1:8000;
-  }
 }
 ```
 
-Note that this does two things. First, it redirects all HTTP traffic to HTTPS. Second, it sends all HTTPS traffic to the Express app running on port 8000.
-
-**5.** Symlink this new configuration file to `/etc/nginx/sites-enabled` with:
+**4.** Symlink the newly-created configuration file into `/etc/nginx/sites-enabled`:
 
 ```
 sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/example.com
 ```
 
-**6.** Test the NGINX configuration with:
+**5.** Confirm that the configuration is valid:
 
 ```
 sudo nginx -t
 ```
 
-**7.** If it passes, restart the NGINX service with:
+**6.** Restart NGINX:
+
+```sudo service nginx restart```
+
+**7.** Request Certbot certificates. Note that this will modify the NGINX configuration files for any selected domains (e.g., `/etc/nginx/sites-available/example.com`).
+
+```
+sudo certbot --nginx
+```
+
+**8.** Restart NGINX:
 
 ```
 sudo service nginx restart
 ```
 
-**8.** Build a simple Express app (or use a preexisting one) that'll run on port 8000:
+**9.** Build a simple Express app (or use a preexisting one) that'll run on port 8000:
 
 ```js
 let express = require("express")
@@ -85,4 +74,34 @@ app.listen(8000)
 forever start /path/to/app.js
 ```
 
-**10.** Confirm that you can access https://example.com in the browser.
+**10.** Modify `/etc/nginx/sites-available/example.com` such that the SSL section (the server block instructed to listen on port 443) should have a new feature:
+
+```
+server {
+  listen 443 ssl;
+  ...
+  
+  location / {
+    proxy_pass http://127.0.0.1:8000;
+  }
+}
+
+server {
+  listen 80;
+  ...
+}
+```
+
+**11.** Confirm that the NGINX configuration is valid:
+
+```
+sudo nginx -t
+```
+
+**12.** Restart NGINX:
+
+```
+sudo service nginx restart
+```
+
+**13.** Confirm that you can visit https://example.com in the browser!
