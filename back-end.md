@@ -27,10 +27,11 @@ server {
 }
 ```
 
-**4.** Symlink the newly-created configuration file into `/etc/nginx/sites-enabled`:
+**4.** Symlink the newly-created configuration file into `/etc/nginx/sites-enabled` and delete the default file in the same folder:
 
 ```
 sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/example.com
+sudo rm /etc/nginx/sites-enabled/default
 ```
 
 **5.** Confirm that the configuration is valid:
