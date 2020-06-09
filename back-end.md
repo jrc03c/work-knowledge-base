@@ -42,7 +42,9 @@ sudo nginx -t
 
 **6.** Restart NGINX:
 
-```sudo service nginx restart```
+```
+sudo service nginx restart
+```
 
 **7.** Request Certbot certificates. Note that this will modify the NGINX configuration files for any selected domains (e.g., `/etc/nginx/sites-available/example.com`).
 
