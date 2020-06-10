@@ -1,3 +1,21 @@
+# Setup Sequence Overview
+
+1. Create VPS w/ SSH key.
+1. Point DNS records at VPS.
+1. Create a non-root user and give them sudo permissions.
+1. Change the SSH port to something else.
+1. Copy the root's `~/.ssh/authorized_keys` to `/home/<other-user>/.ssh/authorized_keys`.
+1. Restart the SSH server.
+1. Install:
+  - Homebrew
+    - Node
+    - Ruby
+  - Certbot
+  - NGINX
+1. Configure NGINX.
+1. Run Certbot.
+1. Configure Express.
+
 # NGINX w/ Express
 
 > **NOTE:** The following steps assume that you'll be running NGINX as a reverse proxy for an Express app (on Ubuntu 18.04 LTS).
@@ -83,7 +101,7 @@ forever start /path/to/app.js
 server {
   listen 443 ssl;
   ...
-  
+
   location / {
     proxy_pass http://127.0.0.1:8000;
   }
