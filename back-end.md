@@ -15,6 +15,8 @@
 1. Configure NGINX.
 1. Run Certbot.
 1. Configure Express.
+1. Configure software firewall (`ufw`).
+1. Configure VPS firewall (via their dashboard).
 
 # NGINX w/ Express
 
